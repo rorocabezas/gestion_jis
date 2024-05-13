@@ -294,6 +294,23 @@ def main(authenticated=False):
                 width=850        
                 )
         st.plotly_chart(fig)
+
+
+	#st.dataframe(df_grouped)
+        st.dataframe(df_filtrado_display)  
+
+        # DataFrame ordenado de forma descendente (de Z a A) por la columna "Ingresos_Act"
+        df_ranking_desc = df_filtrado_display[df_filtrado_display['periodo'] != 'Total'].sort_values(by='desv', ascending=False).head(10)
+
+        # DataFrame ordenado de forma ascendente (de A a Z) por la columna "Ingresos_Act"
+        df_ranking_asc = df_filtrado_display[df_filtrado_display['periodo'] != 'Total'].sort_values(by='desv', ascending=True).head(10)
+
+        # Muestra los resultados
+        st.subheader("Top 10 Sucursales (Z a A)")
+        st.write(df_ranking_desc)
+
+        st.subheader("Top 10 Sucursales (A a Z)")
+        st.dataframe(df_ranking_asc)
  
 if __name__ == "__main__":
     main()   
